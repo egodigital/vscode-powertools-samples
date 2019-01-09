@@ -1,0 +1,194 @@
+<!--
+
+The MIT License (MIT)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+
+-->
+
+<div class="container">
+    <div class="row">
+        <div class="col col-12">
+            <h3>Password Generator</h3>
+        </div>
+    </div>
+
+    <div class="row ego-content">
+        <div class="col col-4 ego-left">
+            <div class="card bg-light mb-3">
+                <div class="card-header font-weight-bold">Settings</div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-12">
+                            <input id="ego-password-length-input" class="form-control" type="text" placeholder="Length (default: 20)">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-12">
+                            <input id="ego-password-count-input" class="form-control" type="text" placeholder="Count (default: 10)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <a class="btn btn-lg btn-block btn-primary" id="ego-generate-passwords-btn">Generate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-8 ego-right">
+            <div class="card bg-light mb-3">
+                <div class="card-header font-weight-bold">Generated Passwords</div>
+
+                <div class="card-body"></div>
+
+                <div class="card-footer">
+                    <a class="btn btn-lg btn-block btn-secondary" id="ego-reset-passwords-btn">Reset</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+.ego-content {
+    margin-top: 32px;
+}
+
+.ego-content .ego-left input[type=text] {
+    margin-bottom: 8px;
+}
+
+
+</style>
+
+
+<script>
+
+let isGeneratingPasswords = false;
+
+function ego_get_generate_btn() {
+    return $('#ego-generate-passwords-btn');
+}
+
+function ego_get_password_area() {
+    return $('.ego-content .ego-right .card-body');
+}
+
+function ego_get_reset_btn() {
+    return $('#ego-reset-passwords-btn');
+}
+
+function ego_on_command(command, data) {
+    switch (command) {
+        case 'passwords_generated':
+            {
+                isGeneratingPasswords = false;
+
+                ego_get_generate_btn().removeClass('disabled');
+                ego_get_reset_btn().removeClass('disabled');
+
+                const PASSWORD_AREA = ego_get_password_area();
+                PASSWORD_AREA.html('');
+
+                if (data.success) {
+                    if (data.cancelled) {
+                        const ALERT = $('<div class="alert alert-info" role="alert" />');
+                        ALERT.text(`Operation has been cancelled.`);
+
+                        ALERT.appendTo(PASSWORD_AREA);
+                    } else {
+                        const PRE = $('<pre />').text(
+                            data.passwords
+                                .join('\n')
+                        );
+
+                        PRE.appendTo(PASSWORD_AREA);
+                    }
+                } else {
+                    const ALERT = $('<div class="alert alert-danger" role="alert" />');
+                    ALERT.text(`Could not generate passwords: '${ data.error }'`);
+
+                    ALERT.appendTo(PASSWORD_AREA);
+                }
+            }
+            break;
+    }
+}
+
+function ego_on_loaded() {
+    ego_reset_password_area();
+
+    ego_get_generate_btn().on('click', function() {
+        if (isGeneratingPasswords) {
+            return;
+        }
+
+        isGeneratingPasswords = true;
+
+        ego_get_generate_btn().addClass('disabled');
+        ego_get_reset_btn().addClass('disabled');
+
+        let count = parseInt(
+            ego_to_string(
+                $('#ego-password-count-input').val()
+            ).trim()
+        );
+        if (isNaN(count)) {
+            count = 10;
+        }
+        count = Math.max(count, 0);
+        count = Math.min(count, 100);
+
+        let length = parseInt(
+            ego_to_string(
+                $('#ego-password-length-input').val()
+            ).trim()
+        );
+        if (isNaN(length)) {
+            length = 20;
+        }
+        length = Math.max(length, 1);
+        length = Math.min(length, 128);
+
+        const PASSWORD_AREA = ego_get_password_area();
+        PASSWORD_AREA.html('')
+            .append( $('<div class="loader small border-top-info ego-ajax-loader" />') );
+
+        ego_post('generate_passwords', {
+            count: count,
+            length: length
+        });
+    });
+
+    ego_get_reset_btn().on('click', function() {
+        ego_reset_password_area();
+    });
+}
+
+function ego_reset_password_area() {
+    ego_get_password_area()
+        .html('')
+        .append('<div>Please click on the generate button on the left side, to generate passwords.</div>');
+}
+
+</script>

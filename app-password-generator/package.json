@@ -1,0 +1,11 @@
+{
+    "name": "password-generator",
+    "displayName": "Password Generator",
+    "description": "Generates strong passwords.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": {
+        "email": "hello@e-go-digital.com",
+        "name": "e.GO Digital GmbH"
+    }
+}
