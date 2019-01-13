@@ -1,0 +1,5 @@
+# define one or more glob patterns of files
+# which should be ignored
+# when creating a package
+
+**/*.map

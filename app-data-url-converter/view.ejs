@@ -1,0 +1,171 @@
+<!--
+
+The MIT License (MIT)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+
+-->
+
+<div class="container">
+  <div class="container">
+    <div class="row">
+        <div class="col col-12">
+            <h3>Data URL Converter</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-12">
+            <ul class="nav nav-tabs" id="ego-global-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="ego-to-data-url-tab" data-toggle="tab" href="#ego-to-data-url" role="tab" aria-controls="ego-to-data-url" aria-selected="true">
+                        To Data URL
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="ego-from-data-url-tab" data-toggle="tab" href="#ego-from-data-url" role="tab" aria-controls="ego-from-data-url">
+                        From Data URL
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="ego-tab-content">
+                <div class="tab-pane fade show active" id="ego-to-data-url" role="tabpanel" aria-labelledby="ego-to-data-url-tab">
+                    <a id="ego-input-file" class="btn btn-primary btn-lg btn-block">Select File</a>
+
+                    <div class="ego-data-url"></div>
+                </div>
+
+                <div class="tab-pane fade show" id="ego-from-data-url" role="tabpanel" aria-labelledby="ego-from-data-url-tab">
+                    <textarea id="ego-output-file" class="form-control" placeholder="Put your data URL here ..."></textarea>
+
+                    <a id="ego-save-to-file" class="btn btn-primary btn-lg btn-block">Save To File</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+#ego-global-tab {
+    margin-top: 16px;
+}
+
+#ego-to-data-url .ego-data-url {
+    clear: both;
+    display: block;
+    margin-top: 16px;    
+    width: 100%;
+}
+
+#ego-to-data-url .ego-data-url .ego-result {
+    background-color: #e0e0e0;
+    font-family: monospace;
+    max-height: 480px;
+    overflow-x: none;
+    overflow-y: auto;
+    padding: 16px;
+    word-wrap: break-word;
+}
+
+#ego-to-data-url .ego-data-url .ego-copy-to-clipboard {
+    margin-top: 16px;
+}
+
+#ego-output-file {
+    height: 480px;
+}
+
+#ego-save-to-file {
+    margin-top: 16px;
+}
+
+.tab-pane {
+    padding: 8px;
+}
+
+</style>
+
+<script>
+
+function ego_on_command(command, data) {
+    switch (command) {
+        case 'fileToDataURLFinished':
+            {
+                $('#ego-input-file').val(null);
+
+                const DATA_URL = $('#ego-to-data-url .ego-data-url');
+                DATA_URL.html('');
+
+                if (data.success) {
+                    DATA_URL.append(
+                        $('<div class="ego-result" />')
+                            .text(data.url)
+                    );
+
+                    const COPY_TO_CLIPBOARD = $('<a class="btn btn-secondary btn-lg btn-block ego-copy-to-clipboard">' + 
+                                                'Copy To Clipboard' + 
+                                                '</a>');
+
+                    COPY_TO_CLIPBOARD.on('click', function() {
+                        ego_post(
+                            'copyToClipboard',
+                            data.url
+                        );
+                    });
+
+                    COPY_TO_CLIPBOARD.appendTo(
+                        DATA_URL
+                    );
+                } else {
+                    DATA_URL.append(
+                        $('<div class="alert alert-danger" role="alert">')
+                            .text(`Could not create data URL: '${ data.error }'`)
+                    );
+                }
+            }
+            break;
+    }
+}
+
+function ego_on_loaded() {
+    $('#ego-input-file').on('click', function() {
+        ego_post(
+            'fileToDataURL'
+        );
+    });
+
+    $('#ego-save-to-file').on('click', function() {
+        ego_post(
+            'dataURLToFile',
+            $('#ego-output-file').val().trim()
+        );
+    });
+
+    ego_reset_data_url();
+}
+
+function ego_reset_data_url() {
+    const DATA_URL = $('#ego-to-data-url .ego-data-url');
+    DATA_URL.html('');
+}
+
+</script>

@@ -1,0 +1,17 @@
+{
+    "name": "data-url-converter",
+    "displayName": "Data URL Converter",
+    "description": "Converts from and to data URLs.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": {
+        "email": "hello@e-go-digital.com",
+        "name": "e.GO Digital GmbH"
+    },
+    "dependencies": {
+        "data-urls": "^1.1.0",
+        "fs-extra": "^7.0.1",
+        "lodash": "^4.17.11",
+        "mime-types": "^2.1.21"
+    }
+}
