@@ -1,0 +1,11 @@
+{
+    "name": "vue-test",
+    "displayName": "Vue Test",
+    "description": "Shows how run apps with Vue.",
+    "version": "0.0.1",
+    "license": "MIT",
+    "author": {
+        "email": "hello@e-go-digital.com",
+        "name": "e.GO Digital GmbH"
+    }
+}
