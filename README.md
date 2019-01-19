@@ -7,3 +7,7 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 * [data-url-converter](https://github.com/egodigital/vscode-powertools-samples/tree/master/app-data-url-converter)
 * [password-generator](https://github.com/egodigital/vscode-powertools-samples/tree/master/app-password-generator)
 * [vue-test](https://github.com/egodigital/vscode-powertools-samples/tree/master/app-vue-test)
+
+## [Buttons](https://github.com/egodigital/vscode-powertools/wiki/Buttons)
+
+* [open-in-notepad](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-open-in-notepad)
