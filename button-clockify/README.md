@@ -33,7 +33,7 @@ Now create a `clockify_button.js` inside the same folder and fill it with the co
 
 Open [My profile](https://clockify.me/user/settings) and generate a new API token, if needed:
 
-[Clockify My profile](https://github.com/egodigital/vscode-powertools-samples/blob/master/_img/button-clockify1.gif)
+![Clockify My profile](https://github.com/egodigital/vscode-powertools-samples/blob/master/_img/button-clockify1.gif)
 
 The first time, you click on the button, a `clockify-token.txt` file, inside the current user's home directory will be created, where you have to save the API token to.
 
