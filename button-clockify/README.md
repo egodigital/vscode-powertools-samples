@@ -1,4 +1,4 @@
-# App (vue-test)
+# Button (clockify)
 
 Shows how create a button, that makes use of [Clockify API](https://clockify.me/).
 
