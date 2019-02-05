@@ -10,4 +10,5 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 
 ## [Buttons](https://github.com/egodigital/vscode-powertools/wiki/Buttons)
 
+* [clockify](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-clockify)
 * [open-in-notepad](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-open-in-notepad)

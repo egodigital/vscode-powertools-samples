@@ -1,6 +1,6 @@
 # App (vue-test)
 
-Demonstrates, how create an [app](https://github.com/egodigital/vscode-powertools/wiki/Apps) with [Vue](https://vuejs.org/v2/guide/index.html).
+Shows how create a button, that makes use of [Clockify API](https://clockify.me/).
 
 ## Install
 
