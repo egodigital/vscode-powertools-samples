@@ -1,0 +1,16 @@
+{
+    "ego.power-tools": {
+        "buttons": [{
+            "text": "Clockify",
+            "color": "#ffff00",
+            "action": {
+                "type": "script",
+                "script": "clockify_button.js",
+                "options": {
+                    "workspace": "My workspace name or ID",
+                    "project": "My project name or ID"
+                }
+            }
+        }]
+    }
+}
