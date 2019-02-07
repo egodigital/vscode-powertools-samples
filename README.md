@@ -12,3 +12,7 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 
 * [clockify](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-clockify)
 * [open-in-notepad](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-open-in-notepad)
+
+## [Commands](https://github.com/egodigital/vscode-powertools/wiki/Commands)
+
+* [compile-less](https://github.com/egodigital/vscode-powertools-samples/tree/master/command-compile-less)
