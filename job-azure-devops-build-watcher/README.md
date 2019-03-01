@@ -78,6 +78,9 @@ exports.execute = async (args) => {
     // enter your API credentials in 'Azure DevOps' section
     // and save them
     const API_CRED = azure.getAzureDevOpsAPICredentials(args.extension);
+    if (!API_CRED) {
+        return;  // not enough data for credentials
+    }
 
     // s. https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0
     const RESPONSE = await helpers.GET(`https://dev.azure.com/${
