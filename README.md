@@ -16,3 +16,7 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 ## [Commands](https://github.com/egodigital/vscode-powertools/wiki/Commands)
 
 * [compile-less](https://github.com/egodigital/vscode-powertools-samples/tree/master/command-compile-less)
+
+## [Jobs](https://github.com/egodigital/vscode-powertools/wiki/Jobs)
+
+* [azure-devops-build-watcher](https://github.com/egodigital/vscode-powertools-samples/tree/master/job-azure-devops-build-watcher)
