@@ -101,7 +101,7 @@ exports.execute = async (args) => {
         return;
     }
 
-    RESULT.value.forEach((build, i) => {
+    RESULT.value.forEach((build) => {
         // build => https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#build
 
         if (HANDLED_BUILDS.indexOf(build.id) > -1) {
