@@ -21,3 +21,7 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 ## [Jobs](https://github.com/egodigital/vscode-powertools/wiki/Jobs)
 
 * [azure-devops-build-watcher](https://github.com/egodigital/vscode-powertools-samples/tree/master/job-azure-devops-build-watcher)
+
+## Other
+
+* [texteditor](https://github.com/egodigital/vscode-powertools-samples/tree/master/texteditor)
