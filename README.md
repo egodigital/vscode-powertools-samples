@@ -24,4 +24,4 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 
 ## Other
 
-* [texteditor](https://github.com/egodigital/vscode-powertools-samples/tree/master/texteditor)
+* [TextEditor](https://github.com/egodigital/vscode-powertools-samples/tree/master/texteditor)
