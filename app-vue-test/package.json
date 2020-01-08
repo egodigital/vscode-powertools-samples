@@ -1,11 +1,12 @@
 {
     "name": "vue-test",
     "displayName": "Vue Test",
-    "description": "Shows how run apps with Vue.",
-    "version": "0.0.1",
+    "description": "Shows how run apps with Vue and Vuetify.",
+    "version": "0.0.2",
     "license": "MIT",
     "author": {
         "email": "hello@e-go-digital.com",
         "name": "e.GO Digital GmbH"
-    }
+    },
+    "vue": true
 }

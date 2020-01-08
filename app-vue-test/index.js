@@ -17,24 +17,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 
-/**
- * We only need 'ejs' for including the correct
- * path of 'vue.min.js' script.
- */
-exports.getHtml = (args) => {
-    return args.renderFile(
-        'view.ejs',
-        {
-            'vue_js': args.getFileResourceUri('vue.min.js'),
-        }
-    );
-};
 
 /**
  * Is invoked on an event.
  */
 exports.onEvent = async (args) => {
-    // args => https://egodigital.github.io/vscode-powertools/api/interfaces/_contracts_.appeventscriptarguments.html
+    // args => s. https://egodigital.github.io/vscode-powertools/api/interfaces/_contracts_.appeventscriptarguments.html
 
     // s. https://code.visualstudio.com/api/references/vscode-api
     const vscode = args.require('vscode');
@@ -43,41 +31,44 @@ exports.onEvent = async (args) => {
         case 'on.command':
             // is invoked, when the web view has
             // been post a (command) message
-            
-			const COMMAND_NAME = args.data.command;
-            const COMMAND_DATA = args.data.data;
-            if ('hello_from_webview' === COMMAND_NAME) {
-                // we received a message from
-                // 'view.ejs'
-                await args.post('hello_from_extension',
-                                {
-                                    'newMessage': 'Hello, e.GO!'
-                                });
+            {
+                if ('hello_from_webview_command' === args.data.command) {
+                    // this has been send from
+                    // 'mounted()' hook
+                    // in 'my_vuetify_app.vue'
+
+                    vscode.window.showInformationMessage(
+                        'From "app.vue": ' + JSON.stringify(args.data.data, null, 2)
+                    );
+
+                    // send this back to 'my_vuetify_app.ejs'
+                    await args.post('hello_back_from_extension', {
+                        'message': 'Hello, Otto!'
+                    });
+                }
             }
-            break;
-
-        case 'on.loaded':
-            // page inside web view has been completely loaded
-            break;
-
-        case 'on.hidden':
-            // web view has went to the background
-            break;
-        case 'on.shown':
-            // web view has went to the foreground
-            break;
-
-        case 'on.disposed':
-            // the web view has been disposed
             break;
     }
 };
+
 
 /**
  * This returns the title, which is displayed in the tab
  * of the web view.
  */
-exports.getTitle = () => {
-    return "Vue Test";
+exports.getTitle = (args) => {
+    // args => https://egodigital.github.io/vscode-powertools/api/interfaces/_contracts_.appeventscriptarguments.html
+
+    return "My Vuetify app";
 };
 
+/**
+ * This returns the Vue content for the body.
+ */
+exports.getHtml = (args) => {
+    // args => https://egodigital.github.io/vscode-powertools/api/interfaces/_contracts_.appeventscriptarguments.html
+
+    return args.readTextFile(
+        __dirname + '/app.vue'
+    );
+};
