@@ -381,6 +381,8 @@ async function tryGetSVG(args, dataProvider, throwOnError) {
   // s. https://github.com/egodigital/vscode-powertools/blob/master/src/helpers.ts
   // s. https://github.com/mkloubert/vscode-helpers
   const helpers = args.require('./helpers');
+  // s. https://www.npmjs.com/package/xml2js
+  const xml = args.require('xml2js');
 
   try {
     const DATA = helpers.toStringSafe(
