@@ -346,9 +346,9 @@ ${val.stack}`;
 
               const NEW_FILESIZE = fs.statSync(PNG_FILE).size;
               write_ln(`[✅ ${NEW_FILESIZE} (${
-                ((CUR_FILESIZE - NEW_FILESIZE) / CUR_FILESIZE * 100.0)
+                (NEW_FILESIZE / CUR_FILESIZE * 100.0)
                   .toFixed(1)
-              })]`);
+              }%)]`);
             } catch (e) {
               bringOutputToFocus = true;
 
