@@ -361,7 +361,7 @@ ${val.stack}`;
   } catch (e) {
     bringOutputToFocus = true;
 
-    write_ln('' + str(e));
+    write_ln('🆘 ' + str(e));
   } finally {
     if (bringOutputToFocus) {
       args.output.show();
