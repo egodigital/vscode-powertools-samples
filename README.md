@@ -13,6 +13,7 @@ A repository of samples, which demonstrates, how to use the [Power Tools](https:
 * [clockify](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-clockify)
 * [icons](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-icons)
 * [open-in-notepad](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-open-in-notepad)
+* [reactnative-svg-icon-import](https://github.com/egodigital/vscode-powertools-samples/tree/master/button-reactnative-svg-icon-import)
 
 ## [Commands](https://github.com/egodigital/vscode-powertools/wiki/Commands)
 
