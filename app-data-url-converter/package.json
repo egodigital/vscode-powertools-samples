@@ -11,7 +11,7 @@
     "dependencies": {
         "data-urls": "^1.1.0",
         "fs-extra": "^7.0.1",
-        "lodash": "^4.17.14",
+        "lodash": "^4.17.19",
         "mime-types": "^2.1.24"
     }
 }
